@@ -1,0 +1,74 @@
+<nz-layout class="layout">
+  <nz-header>
+    <div class="logo">
+      天山遁安全大数据平台
+    </div>
+    <ul style="line-height: 64px;" class="ant-menu ant-menu-root ant-menu-dark ant-menu-horizontal">
+
+      <li class="ant-menu-submenu ant-menu-submenu-horizontal" (click)="selectSubmenu('1')">
+        <span class="ant-menu-submenu-title">
+          <i class="anticon anticon-database"></i>
+          <span class="nav-text">数据管理</span>
+        </span>
+        <ul class="ant-menu ant-menu-vertical ant-menu-sub"
+            [@expandAnimation]="selectedSubmenu === '1' ? 'fade' : ''"
+            *ngIf="selectedSubmenu === '1'">
+          <li class="ant-menu-item" [routerLinkActive]="'ant-menu-item-selected'"
+              [routerLink]="['/doon/admin/table']">
+            数据表管理
+          </li>
+          <li class="ant-menu-item" [routerLinkActive]="'ant-menu-item-selected'"
+              [routerLink]="['/doon/admin/my-table']">
+            我的数据表
+          </li>
+        </ul>
+      </li>
+      <li class="ant-menu-submenu ant-menu-submenu-horizontal" (click)="selectSubmenu('2')">
+        <span class="ant-menu-submenu-title">
+          <i class="anticon anticon-calculator"></i>
+          <span class="nav-text">数据分析</span>
+        </span>
+        <ul class="ant-menu ant-menu-vertical ant-menu-sub"
+            [@expandAnimation]="selectedSubmenu === '2' ? 'fade' : ''"
+            *ngIf="selectedSubmenu === '2'">
+          <li class="ant-menu-item" [routerLinkActive]="'ant-menu-item-selected'"
+              [routerLink]="['/doon/sql-lab']">
+            数据查询
+          </li>
+          <li class="ant-menu-item" [routerLinkActive]="'ant-menu-item-selected'"
+              [routerLink]="['/doon/workflow']">
+            数据开发
+          </li>
+        </ul>
+      </li>
+      <li class="ant-menu-submenu ant-menu-submenu-horizontal" (click)="selectSubmenu('3')">
+        <span class="ant-menu-submenu-title">
+          <i class="anticon anticon-calculator"></i>
+          <span class="nav-text">任务管理</span>
+        </span>
+        <ul class="ant-menu ant-menu-vertical ant-menu-sub"
+            [@expandAnimation]="selectedSubmenu === '3' ? 'fade' : ''"
+            *ngIf="selectedSubmenu === '3'">
+          <li class="ant-menu-item" [routerLinkActive]="'ant-menu-item-selected'"
+              [routerLink]="['/doon/task']">
+            任务列表
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-header>
+  <nz-content style="margin:0 16px;">
+    <nz-breadcrumb style="margin:12px 0;">
+      <nz-breadcrumb-item *ngFor="let breadCrumb of ((routerStateUrl$ | async)?.breadCrumb); index as index">
+        <a [routerLink]="[breadCrumb.url]" class="breadcrumb-a"
+           *ngIf="index !== (routerStateUrl$ | async)?.breadCrumb?.length - 1 && index !== 0">{{breadCrumb.name}}</a>
+        <span *ngIf="index === (routerStateUrl$ | async)?.breadCrumb?.length - 1 || index === 0">{{breadCrumb.name}}</span>
+      </nz-breadcrumb-item>
+    </nz-breadcrumb>
+    <div style="padding:24px; background: #fff; min-height: 360px;">
+      <!--引入根组件-->
+      <router-outlet></router-outlet>
+    </div>
+  </nz-content>
+  <nz-footer style="text-align: center;">Copyright © 2017 Antiy Mobile Security Co.,Ltd. Wuhan. All Rights Reserved</nz-footer>
+</nz-layout>
